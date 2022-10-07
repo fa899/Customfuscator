@@ -1,4 +1,4 @@
-local SHA = loadstring(game:HttpGet("https://raw.githubusercontent.com/fa899/Luafuscator/main/SHA.lua"))()
+local SHA = require("SHA.lua") or loadstring(game:HttpGet("https://raw.githubusercontent.com/fa899/Luafuscator/main/SHA.lua"))()
 local OBFUSCATE = function(SOURCE, MEMESTRINGS, FAKE_CONSTANTS)
 	local cringe = "ABCDEFGHIJKLMNOPQRSTWVXYZ" -- QWERTY based
 
@@ -19,7 +19,7 @@ local OBFUSCATE = function(SOURCE, MEMESTRINGS, FAKE_CONSTANTS)
 				table.insert(
 					c,
 					"_"..SHA:Encrypt(tostring(math.random(100000000, 500000000))..tostring(math.random(100000000, 500000000))).."={["..math.random(500,1000).."]='"..MEMESTRINGS[math.random(#MEMESTRINGS)].."';["..math.random(500,1000).."]="..math.random(500, 1000).." / (#'"..MEMESTRINGS[math.random(#MEMESTRINGS)].."' + 1) + 5 * 10 / 5;["..math.random(500,1000).."]=#'"..MEMESTRINGS[math.random(#MEMESTRINGS)].."';["..math.random(500,1000).."]=#'"..BYTE_1.."'/0.00"..math.random(1, 5).."*(math.pow("..math.random(2, 5)..", "..math.random(6, 10)..")-5-2/.1)}"
-          -- ↑ uses math.pow 
+                                      -- ↑ uses math.pow 
 				)
 			end
 		end
@@ -28,8 +28,10 @@ local OBFUSCATE = function(SOURCE, MEMESTRINGS, FAKE_CONSTANTS)
 	
 	cringe = SHA:Encrypt(cringe)
 	local byte = SHA:Encrypt(SOURCE)
+	-- make code obfuscation realistic meanwhile its an simulation
 	local SRC = "(function() local A,B,C,D,E,F,G; do A = 'X' B = 'e' end end)();\n\n"..SOURCE.."\n\n\n\n\n\n\n\n\n\n\nfunction() a='';b='';c='';d='';e='' end"
 	local WATERMARK = "Luafuscator"
+	-- obfuscator SRC
 	local f = 
 		[[
 		(function(a,b,c)
